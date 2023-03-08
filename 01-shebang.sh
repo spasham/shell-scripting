@@ -8,3 +8,5 @@
 # Apart from the line 1 or the first line of the script, anything which starts with `#` will be referred a COMMENT
 # What is COMMENT ? Comment is just to add some desription or to exclude something
 
+echo Hello World 
+
