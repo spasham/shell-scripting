@@ -13,4 +13,4 @@ echo third value is $3
 
 # bash scriptName.sh 100 200 300
 
-echo "supplied variables are : $*
+echo "supplied variables are : $* "
