@@ -17,3 +17,5 @@ echo -e "lineX\nlineY"
 
 # " : Double Quote 
 # ' : Single Quote
+
+echo -e "lineA\n\tlineB"
