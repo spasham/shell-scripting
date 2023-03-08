@@ -12,5 +12,3 @@ echo second value is $2
 echo third value is $3
 
 # bash scriptName.sh 100 200 300
-
-echo $#
