@@ -10,7 +10,7 @@
 # Declaring a function 
 
 sample() {
-    echo "I am a messaged called from sample function 
+    echo "I am a messaged called from sample function"
 }
 
 # This is how we call a function.
