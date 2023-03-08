@@ -9,4 +9,11 @@ echo line3
 #  \t : It moves the cussor to a tab space and the prints the next like
 
 
-echo line1\nline2
+echo lineX\nlineY
+
+# To use escape sequence characters, you need to enable the escape sequence using an option called `-e`
+
+echo -e "lineX\nlineY"
+
+# " : Double Quote 
+# ' : Single Quote
