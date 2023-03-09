@@ -15,10 +15,10 @@ sample() {
 
 # This is how we call a function.
  stat() {
-    echo -e"\t Total number of sessons : $(who | wc -l)"
+    echo -e "\t Total number of sessons : $(who | wc -l)"
     echo "Todays date is $(date +%F)"
     echo "Load Average On The system is $(uptime | awk -F : '{print $NF}' | awk -F , '{print $1}')"
-    echo "\t stat function completed"
+    echo -e "\t stat function completed"
  }
 
  echo "calling stat function" 
