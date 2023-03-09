@@ -18,8 +18,9 @@ sample() {
 
     echo "Calling sample function"
 
-    exit 2 
-    
+    # exit 2 
+    return 
+
     sample 
  }
 
