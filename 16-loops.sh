@@ -11,5 +11,5 @@
 # For Loop Syntax:
 
 for val in 10 20 30 40 50 ; do 
-    echo $val 
+    echo "value of a in the list is : $val "
 done 
