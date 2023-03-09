@@ -53,5 +53,16 @@ If Command is usually used in 3 forms :
 
     fi
 
-
 COMMENT
+
+echo "Demonstrating Simple If Condiitons 
+
+ACTION=$1
+
+if [ "$ACTION" == "start" ] ; then 
+    echo -e "\e[32m Service Payment is Starting \e[0m" 
+
+else 
+    echo -e "\e[31 Service Payment Status is unknown \e[0m"
+
+fi 
