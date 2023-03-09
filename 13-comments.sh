@@ -8,4 +8,4 @@ echo "Demonstrating Multi Line Comments"
 a=10 
 echo $a 
 echo "I am printing a value"
-COMMENT 
+COMMENT
