@@ -11,3 +11,5 @@
 
 # How to fetch the exit status of the previous executed command ?
 # --> $? : This is going to print the exit code of the previous executed command only .
+
+# Exit code plays an important role in debugging some sciprts which are lengthy. follow the 12th example for better insights.
