@@ -55,11 +55,11 @@ If Command is usually used in 3 forms :
 
 COMMENT
 
-echo "Demonstrating Simple If Condiitons 
+echo "Demonstrating Simple If Condiitons" 
 
 ACTION=$1
 
-if [ "$ACTION" == "start" ] ; then 
+if [ "$ACTION" == "start" ]; then 
     echo -e "\e[32m Service Payment is Starting \e[0m" 
 
 else 
