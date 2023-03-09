@@ -11,7 +11,6 @@
 ACTION=$1
 
 case $ACTION in 
-
     start) 
         echo -e "\e[32m Starting Payment Service \e[0m" 
         exit 0 
