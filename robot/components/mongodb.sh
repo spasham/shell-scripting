@@ -2,7 +2,7 @@
 
 # set -e 
 
-COMPONENT=mongo
+COMPONENT=mongodb
 LOGFILE="/tmp/$COMPONENT.log"
 
 # Validting whether the executed user is a root user or not 
@@ -45,27 +45,19 @@ systemctl daemon-reload  &>> $LOGFILE
 systemctl restart mongod 
 stat $?
 
-# ```
+echo -n "Downloading the  $COMPONENT schema :"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+stat $? 
 
-# 1. Update Listen IP address from 127.0.0.1 to 0.0.0.0 in the config file, so that MongoDB can be accessed by other services.
+echo -n "Extracting the $COMPONENT schema : "
+unzip $COMPONENT.zip  &>> $LOGFILE
+stat $? 
 
-# Config file:   `# vim /etc/mongod.conf`
-
-# ![mongodb-update.JPG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87c01042-0f64-4ac4-ae5a-ffaf62836290/mongodb-update.jpg)
-
-# - Then restart the service
-
-# ```bash
-# # systemctl restart mongod
-# ```
-
-  
-
-# - Every Database needs the schema to be loaded for the application to work.
-
-# ---
-
-#       `Download the schema and inject it.`
+echo -n "Injecting the schema :"
+cd /tmp/$COMPONENT-main
+mongo < catalogue.js    &>> $LOGFILE
+mongo < users.js        &>> $LOGFILE
+stat $? 
 
 # ```
 # # curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"
