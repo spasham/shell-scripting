@@ -46,6 +46,7 @@ stat $?
 echo -n "Extracting the $COMPONENT in the $APPUSER directory"
 cd /home/$APPUSER 
 unzip -o /tmp/$COMPONENT.zip  &>> $LOGFILE
+stat $? 
 
 # 1. So let's switch to the `roboshop` user and run the following commands.
 
