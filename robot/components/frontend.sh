@@ -11,7 +11,7 @@ if [ "$ID" -ne 0 ] ; then
 fi 
 
 echo -n "Installing Ngnix : "
-yum install nginx -y &>> /tmp/frontend.log
+yum install ngasdfsadfsdfinx -y &>> /tmp/frontend.log
 
 if [ $? -eq 0 ] ; then 
     echo -e "\e[32m Success \e[0m"
