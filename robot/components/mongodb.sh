@@ -36,6 +36,15 @@ systemctl enable mongod     &>> $LOGFILE
 systemctl start mongod      &>> $LOGFILE
 stat $? 
 
+echo -n "Updating the $COMPONENT visibility : "
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+stat $? 
+
+echo -n "Performing Daemon-Reload : "
+systemctl daemon-reload  &>> $LOGFILE
+systemctl restart mongod 
+stat $?
+
 # ```
 
 # 1. Update Listen IP address from 127.0.0.1 to 0.0.0.0 in the config file, so that MongoDB can be accessed by other services.
