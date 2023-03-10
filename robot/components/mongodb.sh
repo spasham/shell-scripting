@@ -88,29 +88,29 @@ stat $?
 
 # - Now proceed with the next component `CATALOGUE`
 
-echo -n "Installing Ngnix : "
-yum install nginx -y &>> $LOGFILE
-stat $? 
+# echo -n "Installing Ngnix : "
+# yum install nginx -y &>> $LOGFILE
+# stat $? 
 
-echo -n "Downloading the $COMPONENT component :"
-curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
-stat $? 
+# echo -n "Downloading the $COMPONENT component :"
+# curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+# stat $? 
 
-echo -n "Performing Cleanup of Old $COMPONENT Content :"
-cd /usr/share/nginx/html
-rm -rf *  &>> $LOGFILE
-stat $? 
+# echo -n "Performing Cleanup of Old $COMPONENT Content :"
+# cd /usr/share/nginx/html
+# rm -rf *  &>> $LOGFILE
+# stat $? 
 
-echo -n "Copying the downloaded $COMPONENT content: "
-unzip /tmp/$COMPONENT.zip  &>> $LOGFILE
-mv $COMPONENT-main/* .
-mv static/* .
-rm -rf $COMPONENT-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
+# echo -n "Copying the downloaded $COMPONENT content: "
+# unzip /tmp/$COMPONENT.zip  &>> $LOGFILE
+# mv $COMPONENT-main/* .
+# mv static/* .
+# rm -rf $COMPONENT-main README.md
+# mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-stat $? 
+# stat $? 
 
-echo -n "Starting the service: "
-systemctl enable nginx  &>> $LOGFILE
-systemctl restart nginx &>> $LOGFILE
-stat $? 
+# echo -n "Starting the service: "
+# systemctl enable nginx  &>> $LOGFILE
+# systemctl restart nginx &>> $LOGFILE
+# stat $? 
