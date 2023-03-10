@@ -51,7 +51,7 @@ stat $?
 echo -n "Configuring the permissions :"
 mv /home/$APPUSER/$COMPONENT-main /home/$APPUSER/$COMPONENT
 chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
-$?
+stat $?
 
 # 1. So let's switch to the `roboshop` user and run the following commands.
 
