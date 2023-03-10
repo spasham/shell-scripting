@@ -22,35 +22,19 @@ stat() {
     fi 
 }
 
-echo -n "Configuring the $COMPONENT repo"
+echo -n "Configuring the $COMPONENT repo :"
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
 stat $? 
 
-echo -n "Installing $COMPONENT"
+echo -n "Installing $COMPONENT :"
 yum install -y mongodb-org  &>> $LOGFILE
 stat $? 
 
 
-
-
-
-
-# ## nstall MongoDB Manual Steps.
-
-# Ref URL: [https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
-
-# 1. Setup MongoDB repos.
-
-# ```bash
-# # curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
-# ```
-
-# 1. Install Mongo & Start Service.
-
-# ```bash
-# # yum install -y mongodb-org
-# # systemctl enable mongod
-# # systemctl start mongod
+echo -n "Starting $COMPONENT :"
+systemctl enable mongod
+systemctl start mongod
+stat $? 
 
 # ```
 
