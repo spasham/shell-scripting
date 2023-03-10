@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+set -e 
+
 yum install nginx -y 
 
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
@@ -15,3 +17,9 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 systemctl enable nginx
 systemctl restart nginx
 
+
+
+# # Here are my 3 observations :
+# 1) Few of the steps are failed, still my script executed irrespective of the failure.  : set -e 
+# 2) Installation failed because I've not validated that I've root privileges 
+# 3) The information I would like to provide is like Sucess or Failure
