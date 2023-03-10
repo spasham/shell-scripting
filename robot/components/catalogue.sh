@@ -68,6 +68,7 @@ echo -n "Starting the $COMPONENT service : "
 systemctl daemon-reload &>> $LOGFILE
 systemctl enable $COMPONENT &>> $LOGFILE
 systemctl start $COMPONENT &>> $LOGFILE
+stat $?
 
 # 1. Update SystemD file with correct IP addresses
     
