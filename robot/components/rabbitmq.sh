@@ -17,6 +17,7 @@ stat $?
 echo -n "Starting $COMPONENT :"
 systemctl enable rabbitmq-server  &>> $LOGFILE 
 systemctl start rabbitmq-server   &>> $LOGFILE 
+stat $?
 
 rabbitmqctl list_users | grep $APPUSER  &>> $LOGFILE 
 if [ $? -ne 0 ] ; then 
