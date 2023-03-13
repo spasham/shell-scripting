@@ -2,7 +2,7 @@
 
 # set -e 
 
-COMPONENT=rabbbitmq
+COMPONENT=rabbitmq
 source components/common.sh 
 
 echo -n "Installing and Configuring Dependency :"
