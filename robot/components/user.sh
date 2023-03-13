@@ -5,9 +5,3 @@ source components/common.sh    # Source is going to load the file, so that you c
 
 NODEJS                         # Calling NodeJS Function.
 
-
-echo -n "Updating the systemd file with DB Details :"
-sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
-mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
-stat $? 
-
