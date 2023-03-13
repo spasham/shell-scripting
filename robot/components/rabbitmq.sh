@@ -30,15 +30,3 @@ echo -n "Adding required privileges to the $APPUSER :"
 rabbitmqctl set_user_tags roboshop administrator           &>> $LOGFILE 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"   &>> $LOGFILE 
 stat $? 
-
-
-
-# ```sql
-# # rabbitmqctl add_user roboshop roboshop123
-# # rabbitmqctl set_user_tags roboshop administrator
-# # rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
-# ```
-
-# Ref link : [https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management](https://www.rabbitmq.com/rabbitmqctl.8.html#User_Management)
-
-# 1. We are good with `[rabbitmq`.Next](http://rabbitmq.Next) component is `PAYMENT`
