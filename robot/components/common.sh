@@ -60,8 +60,14 @@ NPM_INSTALL() {
 
 CONFIG_SVC() {
 
+Update `CARTHOST` with cart server ip
+
+Update `USERHOST` with user server ip 
+
+Update `AMQPHOST` with RabbitMQ server ip.
+
     echo -n "Updating the systemd file with DB Details :"
-    sed -i -e  's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+    sed -i  -e  's/AMQPHOST/rabbitmq.roboshop.internal/' -e  's/USERHOST/user.roboshop.internal/'  -e  's/CARTHOST/cart.roboshop.internal/' -e  's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $? 
 
@@ -96,6 +102,15 @@ PYTHON() {
     cd /home/roboshop/$COMPONENT/ 
     pip3 install -r requirements.txt   &>> $LOGFILE 
     stat $? 
+
+    USERID =$(id -u roboshop)
+    GROUPID =$(id -g roboshop)
+    
+    echo -n "Updating the $COMPONENT.ini file :"
+    sed -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
+
+    # Calling Config-Svc Function
+    CONFIG_SVC
 
 }
 
