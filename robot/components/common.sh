@@ -81,6 +81,24 @@ MVN_PACKAGE() {
     stat $?   
 }
 
+PYTHON() {
+    echo -n "Installing Python and dependencies :"
+    yum install python36 gcc python3-devel -y  &>> $LOGFILE
+    stat $?
+
+    # Calling Create-User Functon 
+    CREATE_USER
+
+    # Calling Download_And_Extract Function
+    DOWNLOAD_AND_EXTRACT
+
+    echo -n "Installing $COMPONENT :"
+    cd /home/roboshop/$COMPONENT/ 
+    pip3 install -r requirements.txt   &>> $LOGFILE 
+    stat $? 
+
+}
+
 JAVA() {
     echo -n "Installing Maven  :" 
     yum install maven -y &>> $LOGFILE
