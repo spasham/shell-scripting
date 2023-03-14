@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 COMPONENT=mysql
-source components/common.sh  
+source components/common.sh
 
 
 echo -n "Configuring the $COMPONENT repo :"
@@ -16,7 +16,6 @@ echo -n "Starting $COMPONENT :"
 systemctl enable mysqld  &>> $LOGFILE  
 systemctl start mysqld   &>> $LOGFILE  
 stat $?
-
 
 echo -n "Grab $COMPONENT default password :"
 DEFAULT_ROOT_PWD=$(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
