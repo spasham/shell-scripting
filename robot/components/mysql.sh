@@ -17,13 +17,15 @@ systemctl enable mysqld  &>> $LOGFILE
 systemctl start mysqld   &>> $LOGFILE  
 stat $?
 
+echo -n "Grab $COMPONENT default password :"
+DEFAULT_ROOT_PWD=$(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
+stat $? 
 
-# 1. Now a default root password will be generated and can be seen in the log file.
+echo -n "Password Reset of root user :"
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD}
+stat $?
 
-# ```bash
-# # grep temp /var/log/mysqld.log
-# ( Copy that password )
-# ```
+
 
 # 1. Next, We need to change the default root password in order to start using the database service. Use password as `RoboShop@1` . Rest of the options you can choose `No`
 
