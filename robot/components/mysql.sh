@@ -17,29 +17,27 @@ systemctl enable mysqld  &>> $LOGFILE
 systemctl start mysqld   &>> $LOGFILE  
 stat $?
 
+
 echo -n "Grab $COMPONENT default password :"
 DEFAULT_ROOT_PWD=$(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
 stat $? 
 
-echo -n "Password Reset of root user :"
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD} &>> $LOGFILE 
+# This should only run for the first time or when the default password is not changed.
+echo "show databases;" | mysql -uroot -pRoboShop@1   &>> $LOGFILE 
+if [ $? -ne 0 ] ; then 
+
+    echo -n "Password Reset of root user :"
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD} &>> $LOGFILE 
+    stat $?
+
+fi 
+
+echo -n "Uninstalling Password Validation Plugin :"
+echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1   &>> $LOGFILE
 stat $?
 
 
 
-# 1. Next, We need to change the default root password in order to start using the database service. Use password as `RoboShop@1` . Rest of the options you can choose `No`
-
-# ```bash
-# # mysql_secure_installation
-# ```
-
-# 1. You can check whether the new password is working or not using the following command in MySQL
-
-# First let's connect to MySQL
-
-# ```bash
-# # mysql -uroot -pRoboShop@1
-# ```
 
 # Once after login to MySQL prompt then run this SQL Command. This will uninstall the password validation feature like number of characters, password length, complexty and all. As I don’t want that I’d be uninstalling the `validate_password` plugin
 
