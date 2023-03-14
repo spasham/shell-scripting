@@ -42,30 +42,15 @@ if [ $? -eq 0 ] ; then
 
 fi 
 
+echo -n "Downloading the $COMPONENT Schema :"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"  &>> $LOGFILE
+stat $? 
 
+echo -n "Extracting the $COMPONENT Schema :"
+cd /tmp 
+unzip -o /tmp/$COMPONENT.zip &>> $LOGFILE
+stat $? 
 
-
-
-# Once after login to MySQL prompt then run this SQL Command. This will uninstall the password validation feature like number of characters, password length, complexty and all. As I don’t want that I’d be uninstalling the `validate_password` plugin
-
-# ```sql
-# > uninstall plugin validate_password;
-# ```
-
-# ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/584e54a9-29fa-4246-9655-e5666a18119b/Untitled.png)
-
-# ## **Setup Needed for Application.**
-
-# As per the architecture diagram, MySQL is needed by
-
-# - Shipping Service
-
-# So we need to load that schema into the database, So those applications will detect them and run accordingly.
-
-# To download schema, Use the following command
-
-# ```bash
-# # curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
-# ```
-
-# Load the schema for mysql. This file contains the list of COUNTRIES, CITIES and their PINCODES. This will be helpful in doing the shipping charges calculation which is based on the distance the product is shippied
+echo -n "Injecting the schema :"
+mysql -u root -pRoboShop@1 <shipping.sql
+stat $? 
