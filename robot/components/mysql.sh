@@ -3,7 +3,6 @@
 COMPONENT=mysql
 source components/common.sh
 
-
 echo -n "Configuring the $COMPONENT repo :"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo 
 stat $?
@@ -12,7 +11,7 @@ echo -n "Installing the $COMPONENT :"
 yum install mysql-community-server -y  &>> $LOGFILE  
 stat $? 
 
-echo -n "Starting $COMPONENT :"
+echo -n "Starting $COMPONENT :" 
 systemctl enable mysqld  &>> $LOGFILE  
 systemctl start mysqld   &>> $LOGFILE  
 stat $?
