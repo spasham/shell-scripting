@@ -18,10 +18,10 @@ echo -n "Ami ID is $AMI_ID"
 
 echo -n "Launching the instance with $AMI_ID as AMI :"
 IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
-                    --instance-type t3.micro \
-                    --security-group-ids ${SGID} \
-                    --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
-                    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
+                --instance-type t3.micro \
+                --security-group-ids ${SGID} \
+                --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
+                --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
 sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/record.json
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/record.json | jq 
