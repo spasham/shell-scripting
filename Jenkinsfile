@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         ABC_URL = "test.google.com"
-        XYZ_URL = "null"
+        XYZ_URL = ""
     }
     stages{
         stage("A"){
@@ -17,10 +17,10 @@ pipeline{
             steps {
                 sh "echo ========executing b======== "
                 script {
-                    if(env.XYZ_URL == null || env.XYZ_URL == "") {
-                        echo "ABC_URL is null or empty and value is ${XYZ_URL}"
+                    if(env.XYZ_URL != null || env.XYZ_URL != "") {
+                        echo "XYZ_URL is null or empty and value is ${XYZ_URL}"
                     } else {
-                        echo "value is empty : ${ABC_URL}"
+                        echo "value is not empty : ${XYZ_URL}"
                         }
 
                     }
