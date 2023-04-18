@@ -18,8 +18,9 @@ pipeline{
                         echo value of ABC_URL is ${ABC_URL}
                     } else {
                         echo value is empty : ${ABC_URL}
-                    }
+                        }
 
+                    }
                 }
             }
         }
