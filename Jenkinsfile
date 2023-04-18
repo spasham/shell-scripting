@@ -5,12 +5,13 @@ pipeline{
     }
     stages{
         stage("A"){
-            steps{
+            steps {
                 sh "echo ========executing A======== "
                 sh "env"
             }
+        }
         stage("B"){
-            steps{
+            steps {
                 sh "echo ========executing b======== "
                 sh "env"
                 script {
@@ -25,4 +26,3 @@ pipeline{
             }
         }
     }
-}
