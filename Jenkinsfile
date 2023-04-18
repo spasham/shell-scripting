@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         ABC_URL = "test.google.com"
-        XYZ_URL = ""
+        XYZ_URL = "xyz.google.com"
     }
     stages{
         stage("A"){
@@ -22,7 +22,7 @@ pipeline{
                         sh "echo XYZ_URL is null or empty"
                     } else {
                         sh "echo Else Condition"
-                        sh "echo value is not empty : ${XYZ_URL}"
+                        sh "echo value is not empty : and XYZ_URL is ${XYZ_URL}"
                         }
 
                     }
