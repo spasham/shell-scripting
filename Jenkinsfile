@@ -20,7 +20,7 @@ pipeline{
                     if(env.ABC_URL == null || env.ABC_URL == "") {
                         echo "ABC_URL is null or empty and value is ${ABC_URL}"
                     } else {
-                        echo value is empty : ${ABC_URL}
+                        echo "value is empty : ${ABC_URL}"
                         }
 
                     }
