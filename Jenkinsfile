@@ -19,7 +19,7 @@ pipeline{
                 script {
                     if(env.XYZ_URL == null || env.XYZ_URL == "") {
                         sh "echo If condition"
-                        sh "echo XYZ_URL is null or empty and value is ${XYZ_URL}"
+                        sh "echo XYZ_URL is null or empty"
                     } else {
                         sh "echo Else Condition"
                         sh "echo value is not empty : ${XYZ_URL}"
