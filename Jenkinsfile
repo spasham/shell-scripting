@@ -15,14 +15,14 @@ pipeline{
         }
         stage("B"){
             steps {
-                sh "echo ========executing b======== "
+                
                 script {
                     if(env.XYZ_URL != null || env.XYZ_URL != "") {
-                        echo "If condition"
-                        echo "XYZ_URL is null or empty and value is ${XYZ_URL}"
+                        sh "echo If condition"
+                        sh "echo XYZ_URL is null or empty and value is ${XYZ_URL}"
                     } else {
-                        echo "Else Condition"
-                        echo "value is not empty : ${XYZ_URL}"
+                        sh "echo Else Condition"
+                        sh "echo value is not empty : ${XYZ_URL}"
                         }
 
                     }
