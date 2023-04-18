@@ -17,8 +17,8 @@ pipeline{
             steps {
                 sh "echo ========executing b======== "
                 script {
-                    if(env.ABC_URL == null || env.ABC_URL == "") {
-                        echo "ABC_URL is null or empty and value is ${ABC_URL}"
+                    if(env.XYZ_URL == null || env.XYZ_URL == "") {
+                        echo "ABC_URL is null or empty and value is ${XYZ_URL}"
                     } else {
                         echo "value is empty : ${ABC_URL}"
                         }
