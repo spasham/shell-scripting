@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         ABC_URL = "test.google.com"
-        XYZ_URL = ""
+        XYZ_URL = "xyz.google.com"
     }
     stages{
         stage("A"){
@@ -30,3 +30,6 @@ pipeline{
             }
         }
     }
+
+
+// We cannot print a environment variable that is null.
