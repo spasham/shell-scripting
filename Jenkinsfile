@@ -17,7 +17,7 @@ pipeline{
             steps {
                 sh "echo ========executing b======== "
                 script {
-                    if(${XYZ_URL}) {
+                    if(env.XYZ_URL) {
                         echo value of ABC_URL is ${ABC_URL}
                     } else {
                         echo value is empty : ${ABC_URL}
