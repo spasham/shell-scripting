@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         ABC_URL = "test.google.com"
-        XYZ_URL = "xyz.google.com"
+        XYZ_URL = ""
     }
     stages{
         stage("A"){
