@@ -10,7 +10,7 @@ pipeline{
                 sh "env"
                 sh "echo ========executing A======== "
                 sh "echo value of ABC_URL is ${ABC_URL}"
-                sh "echo value of XYZ_URL is ${XYZ_URL}"
+                // sh "echo value of XYZ_URL is ${XYZ_URL}"
             }
         }
         stage("B"){
