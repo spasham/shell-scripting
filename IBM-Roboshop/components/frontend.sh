@@ -1,7 +1,16 @@
 #!/bin/bash
 echo "I'm frontend"
 
-set -e
+set -e          #if any error occurs script will get exited
+
+
+#validating if executed user is root or not
+
+USER_ID=$(id)
+
+if [ USER_ID -ne 0 ]
+then
+    echo "\e[32m You should execute this script or wiht sudo access\e[0m]"
 yum install nginx -y
 
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
