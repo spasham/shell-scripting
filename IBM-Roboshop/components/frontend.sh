@@ -3,7 +3,8 @@ echo "I'm frontend"
 
 #set -e          #if any error occurs script will get exited
 
-
+APP=frontend
+LOGFILE="/tmp/$APP.log"
 #validating if executed user is root or not
 
 USER_ID=$(id -u)
@@ -22,28 +23,28 @@ else
 fi
 }
 echo -n "Installing nginx: "
-yum install nginx -y &>>/tmp/frontend.log
+yum install nginx -y &>>$LOGFILE
 
 stat $?
 
 echo -n "Downling the frontend code: "
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
 stat $?
 
-echo -n "Performing cleanup of old frontend conetnet:"
+echo -n "Performing cleanup of old $APP conetnet:"
 cd /usr/share/nginx/html  
-rm -rf * &>>/tmp/frontend.log
+rm -rf * &>>$LOGFILE
 stat $?
 
-echo -n "Copying the frontend code:"
-unzip /tmp/frontend.zip &>>/tmp/frontend.log
-mv frontend-main/* .
+echo -n "Copying the $APP code:"
+unzip /tmp/$APP.zip &>>$LOGFILE
+mv $APP-main/* .
 mv static/* .
-rm -rf frontend-main README.md
-ms localhost.conf /etc/nginx/default.d/roboshop.conf
+rm -rf $APP-main README.md
+mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Starting and enabling the service:"
-systemctl start nginx &>>/tmp/frontend.log
-systemctl enable nginx &>>/tmp/frontend.log
+systemctl start nginx &>>$LOGFILE
+systemctl enable nginx &>>$LOGFILE
 stat $?
