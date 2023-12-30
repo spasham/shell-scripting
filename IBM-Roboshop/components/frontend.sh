@@ -40,7 +40,7 @@ unzip /tmp/frontend.zip &>>/tmp/frontend.log
 mv frontend-main/* .
 mv static/* .
 rm -rf frontend-main README.md
-mv localhost.conf /etc/nginx/default.d/roboshop.conf
+ms localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Starting and enabling the service:"
