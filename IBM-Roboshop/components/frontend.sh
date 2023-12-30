@@ -13,34 +13,27 @@ if [ $USER_ID -ne 0 ]; then
     exit 1
 fi
 
-echo -n "Installing nginx: "
-yum install nginx -y &>>/tmp/frontend.log
-if [ $? -eq 0 ]; then
+stat() {
+    if [ $1 -eq 0 ]; then
     echo "Success"
 else
     echo -e "\e[31m Failure \e[0m"
     exit 2
 fi
+}
+echo -n "Installing nginx: "
+yum install nginx -y &>>/tmp/frontend.log
+
+stat $?
 
 echo -n "Downling the frontend code: "
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+stat $?
 
-if [ $? -eq 0 ]; then
-    echo "Success"
-else
-    echo -e "\e[31m Failure \e[0m"
-    exit 2
-fi
 echo -n "Performing cleanup of old frontend conetnet:"
 cd /usr/share/nginx/html  
 rm -rf * &>>/tmp/frontend.log
-
-if [ $? -eq 0 ]; then
-    echo "Success"
-else
-    echo -e "\e[31m Failure \e[0m"
-    exit 2
-fi
+stat $?
 
 echo -n "Copying the frontend code:"
 unzip /tmp/frontend.zip &>>/tmp/frontend.log
@@ -48,19 +41,9 @@ mv frontend-main/* .
 mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
-if [ $? -eq 0 ]; then
-    echo "Success"
-else
-    echo -e "\e[31m Failure \e[0m"
-    exit 2
-fi
+stat $?
 
 echo -n "Starting and enabling the service:"
 systemctl start nginx &>>/tmp/frontend.log
 systemctl enable nginx &>>/tmp/frontend.log
-if [ $? -eq 0 ]; then
-    echo "Success"
-else
-    echo -e "\e[31m Failure \e[0m"
-    exit 2
-fi
+stat $?
