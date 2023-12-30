@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "I'm frontend"
 
-set -e          #if any error occurs script will get exited
+#set -e          #if any error occurs script will get exited
 
 
 #validating if executed user is root or not
@@ -13,8 +13,8 @@ if [ $USER_ID -ne 0 ]; then
     exit 1
 fi
 
-echo "Installing nginx"
-yum install nginx -y &>>/tmp/frontend.log
+echo -n "Installing nginx: "
+yum install ng-inx -y &>>/tmp/frontend.log
 if [ $? -eq 0 ]; then
     echo "Success"
 else
