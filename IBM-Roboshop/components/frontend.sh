@@ -6,10 +6,9 @@ set -e          #if any error occurs script will get exited
 
 #validating if executed user is root or not
 
-USER_ID=$(id)
+USER_ID=$(id -u)
 
-if [ $USER_ID -ne 0 ]
-then
+if [ $USER_ID -ne 0 ]; then
     echo "You should execute this script or wiht sudo access"
     exit 1
 fi
