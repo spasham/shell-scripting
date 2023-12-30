@@ -4,7 +4,7 @@ echo "I'm frontend"
 #set -e          #if any error occurs script will get exited
 
 APP=frontend
-LOGFILE="/tmp/$APP.log"
+LOGFILE=/tmp/$APP.log
 #validating if executed user is root or not
 
 USER_ID=$(id -u)
