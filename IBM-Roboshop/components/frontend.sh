@@ -9,7 +9,7 @@ set -e          #if any error occurs script will get exited
 USER_ID=$(id -u)
 
 if [ $USER_ID -ne 0 ]; then
-    echo "You should execute this script or wiht sudo access"
+    echo "You should execute this script as root user or wiht sudo access"
     exit 1
 fi
 
