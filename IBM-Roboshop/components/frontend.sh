@@ -8,9 +8,12 @@ set -e          #if any error occurs script will get exited
 
 USER_ID=$(id)
 
-if [ USER_ID -ne 0 ]
+if [ $USER_ID -ne 0 ]
 then
-    echo "\e[32m You should execute this script or wiht sudo access\e[0m]"
+    echo "\e[31m You should execute this script or wiht sudo access\e[0m]"
+    exit 1
+fi
+
 yum install nginx -y
 
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
