@@ -22,7 +22,7 @@ else
     exit 2
 fi
 
-echo "Downling the frontend code: "
+echo -n "Downling the frontend code: "
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 
 if [ $? -eq 0 ]; then
@@ -31,7 +31,7 @@ else
     echo -e "\e[31m Failure \e[0m"
     exit 2
 fi
-echo "Performing cleanup of old frontend conetnet:"
+echo -n "Performing cleanup of old frontend conetnet:"
 cd /usr/share/nginx/html  
 rm -rf * &>>/tmp/frontend.log
 
@@ -42,7 +42,7 @@ else
     exit 2
 fi
 
-echo "Copying the frontend code:"
+echo -n "Copying the frontend code:"
 unzip /tmp/frontend.zip &>>/tmp/frontend.log
 mv frontend-main/* .
 mv static/* .
@@ -55,7 +55,7 @@ else
     exit 2
 fi
 
-echo "Starting and enabling the service:"
+echo -n "Starting and enabling the service:"
 systemctl start nginx &>>/tmp/frontend.log
 systemctl enable nginx &>>/tmp/frontend.log
 if [ $? -eq 0 ]; then
