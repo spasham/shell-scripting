@@ -27,8 +27,8 @@ yum install nginx -y &>>$LOGFILE
 
 stat $?
 
-echo -n "Downling the frontend code: "
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
+echo -n "Downling the $APP code: "
+curl -s -L -o /tmp/$APP.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
 stat $?
 
 echo -n "Performing cleanup of old $APP conetnet:"
