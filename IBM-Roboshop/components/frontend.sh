@@ -10,7 +10,7 @@ USER_ID=$(id)
 
 if [ $USER_ID -ne 0 ]
 then
-    echo "\e[31m You should execute this script or wiht sudo access\e[0m]"
+    echo "\e[31m You should execute this script or wiht sudo access\e[0m"
     exit 1
 fi
 
