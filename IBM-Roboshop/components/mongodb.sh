@@ -50,7 +50,7 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 stat $?
 
 echo -n "performing daemon-reload: "
-systemctl daemon-reload &>>LOGFILE
+systemctl daemon-reload &>>$LOGFILE
 systemctl restart mongod
 stat $?
 
@@ -59,12 +59,13 @@ curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/
 stat $?
 
 echo -n "Extracting the $APP archive: "
-unzip /tmp/mongodb.zip >>/tmp/$APP.log
+unzip /tmp/mongodb.zip >>$LOGFILE
 stat $?
 
 echo -n "Injecting the schema into $APP: "
+cd /tmp/$APP-main
 mongo < catalogue.js &>>$LOGFILE
-mongo < users.js &>>$LOGFILE
+mongo < users.js >>$LOGFILE
 stat $?
 
 
