@@ -40,11 +40,13 @@ echo -n "Installing $APP: "
 yum install -y mongodb-org &>>$LOGFILE
 stat $?
 
+
+echo -n "updating the localhost ip 127.0.0.1 to 0.0.0.0: "
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+stat $?
+
 echo -n "Starting $APP service: "
 systemctl start mongod
 systemctl enable mongod
 stat $?
-
-echo -n "updating the localhost ip 127.0.0.1 to 0.0.0.0: "
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 
