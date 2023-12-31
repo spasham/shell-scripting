@@ -21,18 +21,18 @@ else
 fi
 }
 
-echo -n "Configuring the repo for $APP: "
-#curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
- cat >/etc/yum.repos.d/$APP.repo <<EOL
+# echo -n "Configuring the $APP repo :"
+# curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
+# stat $? 
+
+cat >/etc/yum.repos.d/$APP.repo <<EOL
 [mongodb-org-4.2]
 name=MongoDB Repository
-baseurl=https://repo.$APP.org/yum/redhat/$releasever/$APP-org/4.2/x86_64/
-gpgcheck=0
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+gpgcheck=1
 enabled=1
-gpgkey=https://www.$APP.org/static/pgp/server-4.2.asc
+gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 EOL
-
-stat $?
 
 echo -n "Installing $APP: "
 yum install -y mongodb-org &>>$LOGFILE
