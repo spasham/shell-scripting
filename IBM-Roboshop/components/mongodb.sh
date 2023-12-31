@@ -58,7 +58,7 @@ unzip mongodb.zip &>>$LOGFILE
 stat $?
 
 echo -n "Injecting the schema into $APP: "
-cd /tmp/$APP-main
+echo $(pwd)
 mongo < catalogue.js &>>$LOGFILE
 mongo < users.js >>$LOGFILE
 stat $?
