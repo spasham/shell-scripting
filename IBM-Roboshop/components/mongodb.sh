@@ -4,7 +4,7 @@ echo "I am mongodb service"
 
 #set -e          #if any error occurs script will get exited
 
-APP=mongo
+APP=mongodb
 LOGFILE=/tmp/$APP.log
 #validating if executed user is root or not
 
@@ -25,7 +25,7 @@ fi
 }
 
 echo -n "Configuring the repo for $APP: "
-cat >/etc/yum.repos.d/mongodb.repo <<EOL
+cat >/etc/yum.repos.d/$APP.repo <<EOL
 [mongodb-org-7.0]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/
@@ -52,6 +52,19 @@ stat $?
 echo -n "performing daemon-reload: "
 systemctl daemon-reload &>>LOGFILE
 systemctl restart mongod
+stat $?
+
+echo -n "Downloding $APP database schema: "
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
+stat $?
+
+echo -n "Extracting the $APP archive: "
+unzip /tmp/mongodb.zip >>/tmp/$APP.log
+stat $?
+
+echo -n "Injecting the schema into $APP: "
+mongo < catalogue.js &>>$LOGFILE
+mongo < users.js &>>$LOGFILE
 stat $?
 
 
