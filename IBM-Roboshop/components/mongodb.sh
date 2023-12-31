@@ -1,7 +1,4 @@
 #!/bin/bash
-echo "I am mongodb service"
-
-
 #set -e          #if any error occurs script will get exited
 
 APP=mongodb
@@ -56,10 +53,7 @@ stat $?
 
 echo -n "Downloding $APP database schema: "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
-stat $?
-
-echo -n "Extracting the $APP archive: "
-unzip /tmp/mongodb.zip >>$LOGFILE
+unzip /tmp/mongodb.zip &>>$LOGFILE
 stat $?
 
 echo -n "Injecting the schema into $APP: "
