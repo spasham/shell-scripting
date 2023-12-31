@@ -55,10 +55,12 @@ echo -n "Downloding $APP database schema: "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
 cd /tmp
 unzip mongodb.zip &>>$LOGFILE
+echo $(pwd)
 stat $?
 
 echo -n "Injecting the schema into $APP: "
 cd /tmp/$APP-main
+echo $(pwd)
 mongo < catalogue.js &>>$LOGFILE
 mongo < users.js >>$LOGFILE
 stat $?
