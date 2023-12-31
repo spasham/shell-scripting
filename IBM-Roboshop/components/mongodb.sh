@@ -59,8 +59,8 @@ stat $?
 
 echo -n "Injecting the schema into $APP: "
 cd /tmp/$APP-main
-mongod < catalogue.js &>>$LOGFILE
-mongod < users.js >>$LOGFILE
+mongodb < catalogue.js &>>$LOGFILE
+mongodb < users.js >>$LOGFILE
 stat $?
 
 
