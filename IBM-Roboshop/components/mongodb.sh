@@ -53,7 +53,8 @@ stat $?
 
 echo -n "Downloding $APP database schema: "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
-unzip /tmp/mongodb.zip &>>$LOGFILE
+cd /tmp
+unzip mongodb.zip &>>$LOGFILE
 stat $?
 
 echo -n "Injecting the schema into $APP: "
