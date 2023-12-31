@@ -22,14 +22,15 @@ fi
 }
 
 echo -n "Configuring the repo for $APP: "
-cat >/etc/yum.repos.d/$APP.repo <<EOL
-[mongodb-org-4.4]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.4/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
-EOL
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
+# cat >/etc/yum.repos.d/$APP.repo <<EOL
+# [mongodb-org-4.4]
+# name=MongoDB Repository
+# baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.4/x86_64/
+# gpgcheck=1
+# enabled=1
+# gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
+# EOL
 
 stat $?
 
