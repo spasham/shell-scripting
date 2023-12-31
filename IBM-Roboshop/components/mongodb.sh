@@ -21,18 +21,18 @@ else
 fi
 }
 
-# echo -n "Configuring the $APP repo :"
-# curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
-# stat $? 
+echo -n "Configuring the $APP repo :"
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
+stat $? 
 
-cat >/etc/yum.repos.d/$APP.repo <<EOL
-[mongodb-org-4.2]
-name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
-EOL
+# cat >/etc/yum.repos.d/$APP.repo <<EOL
+# [mongodb-org-4.2]
+# name=MongoDB Repository
+# baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
+# gpgcheck=1
+# enabled=1
+# gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
+# EOL
 
 echo -n "Installing $APP: "
 yum install -y mongodb-org &>>$LOGFILE
@@ -55,7 +55,7 @@ stat $?
 echo -n "Downloding $APP database schema: "
 curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
 cd /tmp
-unzip mongodb.zip &>>$LOGFILE
+unzip -o mongodb.zip &>>$LOGFILE
 stat $?
 
 echo -n "Injecting the schema into $APP: "
