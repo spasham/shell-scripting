@@ -1,67 +1,45 @@
-#!/bin/bash
-#set -e          #if any error occurs script will get exited
+#!/bin/bash 
 
-APP=mongodb
-LOGFILE=/tmp/$APP.log
-#validating if executed user is root or not
+# set -e 
 
-USER_ID=$(id -u)
+COMPONENT=mongodb
+source components/common.sh  
 
-if [ $USER_ID -ne 0 ]; then
-    echo "You should execute this script as root user or wiht sudo access"
-    exit 1
-fi
 
-stat() {
-    if [ $1 -eq 0 ]; then
-    echo "Success"
-else
-    echo -e "\e[31m Failure \e[0m"
-    exit 2
-fi
-}
-
-echo -n "Configuring the $APP repo :"
+echo -n "Configuring the $COMPONENT repo :"
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
 stat $? 
 
-# cat >/etc/yum.repos.d/$APP.repo <<EOL
-# [mongodb-org-4.2]
-# name=MongoDB Repository
-# baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-# gpgcheck=1
-# enabled=1
-# gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
-# EOL
+echo -n "Installing $COMPONENT :"
+yum install -y mongodb-org  &>> $LOGFILE
+stat $? 
 
-echo -n "Installing $APP: "
-yum install -y mongodb-org &>>$LOGFILE
-stat $?
 
-echo -n "Starting $APP service: "
-systemctl start mongod
-systemctl enable mongod
-stat $?
+echo -n "Starting $COMPONENT :"
+systemctl enable mongod     &>> $LOGFILE
+systemctl start mongod      &>> $LOGFILE
+stat $? 
 
-echo -n "updating the localhost ip 127.0.0.1 to 0.0.0.0: "
+echo -n "Updating the $COMPONENT visibility : "
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+stat $? 
+
+echo -n "Performing Daemon-Reload : "
+systemctl daemon-reload  &>> $LOGFILE
+systemctl restart mongod 
 stat $?
 
-echo -n "performing daemon-reload: "
-systemctl daemon-reload &>>$LOGFILE
-systemctl restart mongod
-stat $?
+echo -n "Downloading the  $COMPONENT schema :"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+stat $? 
 
-echo -n "Downloding $APP database schema: "
-curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/$APP/archive/main.zip"
-cd /tmp
-unzip -o mongodb.zip &>>$LOGFILE
-stat $?
+echo -n "Extracting the $COMPONENT schema : "
+cd /tmp 
+unzip -o $COMPONENT.zip  &>> $LOGFILE
+stat $? 
 
-echo -n "Injecting the schema into $APP: "
-cd /tmp/$APP-main
-mongod < catalogue.js &>>$LOGFILE
-mongod < users.js >>$LOGFILE
-stat $?
-
-
+echo -n "Injecting the schema :"
+cd /tmp/$COMPONENT-main
+mongo < catalogue.js    &>> $LOGFILE
+mongo < users.js        &>> $LOGFILE
+stat $? 
