@@ -40,4 +40,8 @@ echo -n "Installing $APP: "
 yum install -y mongodb-org &>>$LOGFILE
 stat $?
 
+echo -n "Starting $APP service: "
+systemctl start mongod
+systemctl enable mongod
+stat $?
 
