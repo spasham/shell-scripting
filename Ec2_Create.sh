@@ -1,12 +1,14 @@
 #!/bin/bash
 
-APP=$1
 
 if [ -z "$1" ]
   then
   echo -e " provide APP name as command line arguement \t\t"
   exit 1
 fi
+
+
+APP=$1
 
 rm -rf akey*
 
@@ -20,4 +22,4 @@ echo "Launching AWS ec2 Instance.."
 
 #SYNTAX: aws ec2 run-instances [other options] --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyInstanceName}]'
 
-aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --key-name akey  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$APP}]'|jq
+aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --key-name akey  --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$APP}]"|jq
