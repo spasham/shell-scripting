@@ -16,7 +16,8 @@ sg=$(aws ec2 create-security-group --group-name iSec --description "My default s
 sg_id=$(aws ec2 describe-security-groups |jq ".SecurityGroups[].GroupId" |sed -e 's/"//g' | tail -n1)
 
 aws ec2 authorize-security-group-ingress --group-id $sg_id --protocol tcp --port 22 --cidr 0.0.0.0/0 
-
+aws ec2 authorize-security-group-ingress --group-id $sg_id --protocol tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $sg_id --protocol tcp --port 8080 --cidr 0.0.0.0/0
 
 KEY_PAIR=$(aws ec2 create-key-pair --key-name akey --query 'KeyMaterial' --output text > akey.pem)
 
