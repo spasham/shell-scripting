@@ -2,11 +2,11 @@
 
 COMPONENT=$1
 
-if [ -z "$1" ]
-  then
-  echo -e " component name as an argument is mandatory \t\t"
-  exit 1
-fi
+#if [ -z "$1" ]
+#  then
+#  echo -e " component name as an argument is mandatory \t\t"
+#  exit 1
+#fi
 
 rm -rf akey*
 
